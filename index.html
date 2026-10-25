@@ -246,6 +246,86 @@ form.f{display:flex;flex-direction:column;gap:16px;padding:22px}
 
 footer{border-top:1px solid var(--line);padding-block:22px;color:var(--ink-3);font-size:.85rem}
 
+
+/* ===== Mise en page v2 : plus d'air, moins d'éléments par carte, une hiérarchie nette ===== */
+body{font-size:17px;line-height:1.65}
+.wrap{max-width:1120px}
+main{padding-block:44px 104px}
+h1{font-size:clamp(2.2rem,1.4rem + 3vw,3.5rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,1.2rem + 1vw,1.9rem)}
+.top .wrap{min-height:70px}
+nav.tabs{justify-content:center;gap:4px}
+nav.tabs a{padding:8px 13px;font-size:.98rem}
+.btn{min-height:46px;padding:10px 20px;border-radius:10px;font-size:1rem}
+.btn.sm{min-height:38px;padding:6px 14px;font-size:.92rem}
+
+/* Accueil */
+.hero{gap:56px;padding-block:24px 64px}
+.hero h1{font-size:clamp(2.4rem,1.5rem + 3.4vw,3.9rem);line-height:1.08}
+.hero p.lead{font-size:1.2rem;margin-top:20px;max-width:44ch}
+.hero .row{margin-top:30px;gap:12px}
+.feature{padding:22px 26px 28px}
+.doors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.door{display:grid;grid-template-rows:auto auto 1fr auto;gap:10px;padding:22px 22px 20px;text-decoration:none;color:var(--ink);min-height:230px}
+.door .ico{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:var(--tc);color:var(--ti)}
+.door .ico svg{width:26px;height:26px}
+.door.mem{--tc:var(--t-mem);--ti:var(--t-mem-ink)}.door.org{--tc:var(--t-org);--ti:var(--t-org-ink)}.door.ent{--tc:var(--t-ent);--ti:var(--t-ent-ink)}.door.ens{--tc:var(--t-ens);--ti:var(--t-ens-ink)}
+.door h3{font-size:1.35rem;margin-top:6px}
+.door p{color:var(--ink-2);font-size:.97rem}
+.door .count{font-family:var(--mono);font-size:.8rem;color:var(--ti);display:flex;justify-content:space-between;align-items:center}
+.door .count::after{content:"→";font-family:var(--text);font-size:1.1rem}
+.door:hover{border-color:var(--line-2)}
+.rules{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 40px;margin-top:64px;padding:22px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rules span{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:1.15rem;font-weight:600}
+.rules span::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red)}
+.rules a{font-size:.95rem;align-self:center}
+
+/* Méthodes */
+.phead{gap:14px;margin-bottom:30px}
+.phead p{font-size:1.1rem}
+.toolbar{margin-bottom:8px}
+.legendline{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;font-size:.88rem;color:var(--ink-3);margin-bottom:34px}
+.group{margin-bottom:48px}
+.group-h{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--gc)}
+.group-h h2{font-size:1.7rem}
+.group-h span{color:var(--ink-3);font-size:.95rem}
+.group.mem{--gc:var(--t-mem-ink)}.group.org{--gc:var(--t-org-ink)}.group.ent{--gc:var(--t-ent-ink)}.group.ens{--gc:var(--t-ens-ink)}
+.grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:18px}
+.mcard{padding:20px 22px 18px;gap:12px}
+.mcard h3{font-size:1.32rem;margin-top:0}
+.mcard p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.mcard .foot{border-top:0;padding-top:4px;align-items:center}
+.mcard .go{color:var(--bic);font-weight:600;font-size:.92rem}
+
+/* Fiche */
+.fiche{grid-template-columns:minmax(0,1fr) 260px;gap:40px}
+.fiche-card{padding:22px clamp(20px,4vw,48px) 40px}
+.fiche-card.ruled{background-size:100% 2px,0 0}
+.fiche-card h1{margin-top:30px;font-size:clamp(2rem,1.4rem + 2vw,2.8rem)}
+.fiche-card .bref{font-size:1.22rem;line-height:1.6;margin-top:14px;max-width:56ch}
+.evwhy{margin-top:16px;font-size:.92rem;color:var(--ink-3)}
+.evwhy summary{cursor:pointer;color:var(--bic);font-weight:500;list-style:none}
+.evwhy summary::-webkit-details-marker{display:none}
+.evwhy p{margin-top:6px;max-width:60ch}
+.block{margin-top:44px}
+.block h2{font-size:1.45rem;margin-bottom:16px}
+.steps{gap:14px;max-width:62ch}
+.steps li{grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.steps li::before{width:32px;height:32px;border:0;background:var(--bic);color:var(--bic-ink);font-size:.85rem;font-weight:600}
+.study{background:transparent;border:0;border-left:3px solid var(--bic);border-radius:0;padding:4px 0 4px 18px;max-width:64ch}
+.study+.study{margin-top:20px}
+.study p{font-size:1rem}
+ul.dash{gap:10px;max-width:62ch}
+details.srcs{margin-top:44px;border-top:1px solid var(--line);padding-top:16px}
+details.srcs summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:1.2rem}
+details.srcs ol{margin-top:14px}
+.aside{gap:18px}
+.aside .box{padding:18px}
+
+@media (max-width:980px){.doors{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){nav.tabs{justify-content:flex-start}.fiche{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.doors{grid-template-columns:minmax(0,1fr)}.door{min-height:0}.rules{justify-content:flex-start;gap:10px 24px}}
+
 @media (max-width:860px){
   nav.tabs{order:3;flex-basis:100%;margin-inline:-6px}
   .top .wrap>.btn{margin-left:auto}
@@ -531,45 +611,46 @@ function renderNav(){
 }
 
 /* ================= Vues ================= */
+var ICO = {
+  mem:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="12" rx="2"/><path d="M4 9h16M8 13h6"/><path d="M7 20h10"/></svg>',
+  org:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5L9 20H4v-5z"/><path d="M12.5 6.5l5 5"/></svg>',
+  ens:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5M15 14.5c2.8 0 5 1.6 5 4"/></svg>',
+  ent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M8 10h8M8 14h8M8 18h5"/></svg>'
+};
+function door(cls,href,t,d,c,ico){ var i=h("span",{class:"ico","aria-hidden":"true"}); i.innerHTML=ICO[ico]; return h("a",{class:"bristol door "+cls,href:href},i,h("h3",null,t),h("p",null,d),h("span",{class:"count"},c)); }
 function viewAccueil(){
   var root=h("div");
   var feat=h("a",{class:"bristol ruled feature",href:"#revisions-edn",style:"text-decoration:none;color:inherit;display:block"},
     h("div",{class:"head"}, h("span",{class:"eyebrow"},"Outil à la une"), h("span",{class:"tag free"},"Gratuit")),
     h("h3",null,"Révisions EDN"),
-    h("p",null,"Une fiche par item, puis une relecture et 10 QCM à chaque échéance. Le tutoriel montre comment reprendre la méthode."),
+    h("p",null,"Une fiche par item, puis une relecture et 10 QCM à J1, J7 et J30."),
     h("div",{class:"cycle","aria-label":"Cycle de révision : J0, J1, J7, J30"},
       [["J0","la fiche"],["J1","relire + QCM"],["J7","relire + QCM"],["J30","relire + QCM"]].map(function(c){return h("div",null,h("b",null,c[0]),h("span",null,c[1]))})));
   root.append(h("section",{class:"hero"},
     h("div",null,
-      h("p",{class:"eyebrow"},"Pour les étudiants en santé, et au-delà"),
-      h("h1",{style:"margin-top:10px"},"Des méthodes de travail sourcées, des outils gratuits, et de l’entraide entre étudiants."),
-      h("p",{class:"lead"},"Ce que coûte une prépa ou un coaching privé, on peut souvent le construire ensemble : un planning, de l’entraînement, un groupe, des corrections. Ici, chacun partage ce qui marche pour lui, avec ses sources."),
+      h("p",{class:"eyebrow"},"Pour les étudiants en santé"),
+      h("h1",{style:"margin-top:12px"},"Bien travailler, sans payer de prépa."),
+      h("p",{class:"lead"},"Des méthodes qui ont fait leurs preuves, des outils gratuits et de l’entraide entre étudiants. Tout est sourcé et relu."),
       h("div",{class:"row"}, h("a",{class:"btn primary",href:"#methodes"},"Voir les méthodes"), h("a",{class:"btn",href:"#entraide"},"Trouver un binôme"))),
     feat));
 
   var nAnn=published("annonce").length, nRet=published("retour").length;
-  root.append(h("section",{class:"section"},
-    h("div",{class:"entries"},
-      entry("mem","#methodes","Méthodes","Ce qui aide à apprendre et à retenir, avec ce que disent les études.", (METHODS.length+published("fiche").length)+" fiches"),
-      entry("org","#outils","Outils","Des outils gratuits, chacun avec un pas-à-pas pour se l’approprier.", (TOOLS.length+published("outil").length)+" outils"),
-      entry("ens","#entraide","Entraide","Trouver un binôme, un groupe de travail, des partenaires pour les ECOS.", S.gotPublie? nAnn+" annonce"+(nAnn>1?"s":""):"Annonces relues"),
-      entry("ent","#retours","Retours d’expérience","Comment d’autres ont préparé leurs examens : ce qui a marché, et le reste.", S.gotPublie? nRet+" retour"+(nRet>1?"s":""):"Retours relus"))));
+  root.append(h("section",{class:"doors"},
+    door("mem","#methodes","Méthodes","Apprendre et retenir, avec ce que disent les études.", (METHODS.length+published("fiche").length)+" fiches","mem"),
+    door("org","#outils","Outils","Des outils gratuits, avec un pas-à-pas.", (TOOLS.length+published("outil").length)+" outils","org"),
+    door("ens","#entraide","Entraide","Un binôme, un groupe, des partenaires pour les ECOS.", S.gotPublie? nAnn+" annonce"+(nAnn>1?"s":""):"Annonces","ens"),
+    door("ent","#retours","Retours","Comment d’autres ont préparé leurs examens.", S.gotPublie? nRet+" retour"+(nRet>1?"s":""):"Témoignages","ent")));
 
-  root.append(h("section",{class:"section"},
-    h("h2",null,"Les règles du site"),
-    h("div",{class:"principles"},
-      h("div",null,h("h3",null,"Gratuit, toujours"),h("p",null,"Pas de vente, pas de publicité, pas de cours payants dans l’entraide.")),
-      h("div",null,h("h3",null,"Sourcé"),h("p",null,"Chaque fiche dit d’où elle vient et à quel point c’est prouvé.")),
-      h("div",null,h("h3",null,"Relu avant publication"),h("p",null,"Tout le monde peut proposer ; rien n’est publié sans relecture."))),
-    h("p",{style:"margin-top:18px"},h("a",{href:"#principes"},"Lire tous les principes"))));
+  root.append(h("section",{class:"rules","aria-label":"Les règles du site"},
+    h("span",null,"Gratuit, toujours"), h("span",null,"Sourcé"), h("span",null,"Relu avant publication"),
+    h("a",{href:"#principes"},"Tous les principes")));
   return root;
 }
-function entry(cls,href,t,d,c){ return h("a",{class:"bristol entry "+cls,href:href},h("h3",null,t),h("p",null,d),h("span",{class:"count"},c)); }
 
 function viewMethodes(){
   var root=h("div");
   root.append(h("div",{class:"phead"},h("h1",null,"Méthodes"),
-    h("p",null,"Chaque fiche explique comment faire, ce que disent les études, et les pièges courants. Les barres indiquent la solidité des preuves, pas l’efficacité de la méthode.")));
+    h("p",null,"Chaque fiche dit comment faire, ce que montrent les études et les pièges à éviter.")));
   var bar=h("div",{class:"toolbar"});
   var chips=h("div",{class:"chips",role:"group","aria-label":"Filtrer par thème"});
   [["all","Toutes"]].concat(Object.keys(CATS).map(function(k){return [k,CATS[k].t]})).concat([["sante","Santé"]]).forEach(function(c){
@@ -577,7 +658,8 @@ function viewMethodes(){
   });
   var search=h("input",{class:"search",id:"q",type:"search",placeholder:"Chercher une méthode",value:S.q,"aria-label":"Chercher une méthode",oninput:function(e){S.q=e.target.value;drawGrid()}});
   bar.append(chips,search); root.append(bar);
-  var grid=h("div",{class:"grid",id:"mgrid"}); root.append(grid);
+  root.append(h("div",{class:"legendline"},h("span",null,"Solidité des preuves :"),[3,2,1,0].map(function(l){return ev(l)})));
+  var grid=h("div",{id:"mgrid"}); root.append(grid);
   function drawGrid(){
     var q=S.q.trim().toLowerCase();
     var list=METHODS.filter(function(m){
@@ -586,13 +668,18 @@ function viewMethodes(){
       return !q || (m.titre+" "+m.bref).toLowerCase().indexOf(q)>=0;
     });
     grid.replaceChildren();
-    list.forEach(function(m){
-      grid.append(h("a",{class:"bristol mcard",href:"#m-"+m.id},
-        h("div",{class:"head"},tab(m.cat), m.dom==="Santé"? h("span",{class:"tag"},"Santé"):null),
-        h("h3",null,m.titre), h("p",null,m.bref),
-        h("div",{class:"foot"},ev(m.ev),h("span",{class:"small muted mono"},m.etudes.length+" source"+(m.etudes.length>1?"s":"")))));
+    if(!list.length){ grid.append(h("div",{class:"empty"},"Aucune fiche pour ce filtre.")); return; }
+    Object.keys(CATS).forEach(function(cat){
+      var items=list.filter(function(m){return m.cat===cat}); if(!items.length) return;
+      grid.append(h("section",{class:"group "+cat},
+        h("div",{class:"group-h"},h("h2",null,CATS[cat].t),h("span",null,items.length+" fiche"+(items.length>1?"s":""))),
+        h("div",{class:"grid"},items.map(function(m){
+          return h("a",{class:"bristol mcard",href:"#m-"+m.id},
+            m.dom==="Santé"? h("div",{class:"head"},h("span",{class:"tag"},"Santé")):null,
+            h("h3",null,m.titre), h("p",null,m.bref),
+            h("div",{class:"foot"},ev(m.ev),h("span",{class:"go"},"Lire →")));
+        }))));
     });
-    if(!list.length) grid.append(h("div",{class:"empty",style:"grid-column:1/-1"},"Aucune fiche pour ce filtre."));
   }
   drawGrid();
   var extra=published("fiche");
@@ -616,16 +703,16 @@ function viewFiche(id){
   var card=h("article",{class:"bristol ruled top-only fiche-card"},
     h("div",{class:"head"},tab(m.cat),h("span",{class:"tag"},m.dom),ev(m.ev)),
     h("h1",null,m.titre), h("p",{class:"bref"},m.bref),
+    h("details",{class:"evwhy"},h("summary",null,"Que veut dire « "+EV[m.ev].toLowerCase()+" » ?"),
+      h("p",null,"La barre mesure la solidité des preuves, pas l’efficacité de la méthode. Solides : plusieurs études concordantes. Moyennes : résultats nets mais dans peu de matières. Limitées : une ou deux études. Conseil pratique : pas d’étude, expérience d’étudiants.")),
     h("div",{class:"block"},h("h2",null,"Comment faire"),h("ol",{class:"steps"},m.faire.map(function(s){return h("li",null,h("span",null,s))}))),
     h("div",{class:"block"},h("h2",null,"Ce que disent les études"),
       m.etudes.map(function(e){ var n=srcList.indexOf(e.s)+1; return h("div",{class:"study"},h("div",{class:"who"},e.w),h("p",null,e.t,h("sup",null,h("a",{href:"#src-"+m.id+"-"+n,"aria-label":"Source "+n},"["+n+"]")))); })),
     h("div",{class:"block"},h("h2",null,"Pièges courants"),h("ul",{class:"dash"},m.pieges.map(function(p){return h("li",null,p)}))),
-    h("div",{class:"block"},h("h2",null,"Sources"),h("ol",{class:"src"},srcList.map(function(k,i){var s=SRC[k];return h("li",{id:"src-"+m.id+"-"+(i+1)},s.c," ",ext(s.u,"Lien"))}))));
+    h("details",{class:"srcs",open:true},h("summary",null,"Sources ("+srcList.length+")"),h("ol",{class:"src"},srcList.map(function(k,i){var s=SRC[k];return h("li",{id:"src-"+m.id+"-"+(i+1)},s.c," ",ext(s.u,"Lien"))}))));
   var aside=h("aside",{class:"aside"});
   if(m.outil){ var t=TOOLS.find(function(x){return x.id===m.outil}); if(t) aside.append(h("div",{class:"box"},h("h3",null,"Outil lié"),h("p",{class:"small",style:"margin-bottom:10px"},t.nom+" : "+t.prixT.toLowerCase()+"."), t.interne? h("a",{class:"btn sm primary",href:t.lien},t.lienT) : ext(t.lien,t.lienT,"btn sm"))); }
   aside.append(h("div",{class:"box"},h("h3",null,"À lire ensuite"),m.liens.map(function(l){var x=method(l);return x? h("a",{class:"rel",href:"#m-"+x.id},x.titre):null})));
-  aside.append(h("div",{class:"box legend"},h("h3",null,"Solidité des preuves"),[3,2,1,0].map(function(l){return h("div",null,ev(l))}),
-    h("p",{class:"small muted"},"Solides : plusieurs études concordantes. Moyennes : résultats nets mais dans peu de matières. Limitées : une ou deux études. Conseil pratique : pas d’étude, expérience d’étudiants.")));
   aside.append(h("div",{class:"box"},h("h3",null,"Une erreur ?"),h("p",{class:"small",style:"margin-bottom:10px"},"Une source manque, un chiffre est faux, une étape n’est pas claire."),
     h("a",{class:"btn sm",href:"#proposer-correction",onclick:function(){S.prefill={page:m.titre}}},"Proposer une correction")));
   return h("div",null,h("a",{class:"back",href:"#methodes"},"‹ Toutes les méthodes"),h("div",{class:"fiche"},card,aside));
