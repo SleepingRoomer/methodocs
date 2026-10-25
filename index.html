@@ -1,0 +1,918 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Methodocs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700&family=Red+Hat+Mono:wght@400;500;600&family=Zilla+Slab:wght@500;600;700&display=swap">
+<style>
+/* Layout: a student's index-card box. Bristol cards (red margin line, blue ruling, coloured tabs) hold each method; ballpoint blue for actions. */
+:root{
+  --paper:#f3f5f9; --card:#ffffff; --card-2:#f8f9fc;
+  --ink:#1b2130; --ink-2:#465068; --ink-3:#757d8e; --line:#d9dfe9; --line-2:#c3cbd8;
+  --bic:#2347a6; --bic-ink:#ffffff; --bic-soft:#e5ebf8;
+  --red:#cf4540; --rule:#c8d9ee;
+  --t-mem:#d9e8f8; --t-org:#f8ecbd; --t-ent:#d7eedb; --t-ens:#f7dbe3;
+  --t-mem-ink:#1f4e86; --t-org-ink:#7a5a00; --t-ent-ink:#1f6a3c; --t-ens-ink:#8e2f4f;
+  --ok:#1f7a4a; --mid:#9a6400; --low:#7b8292; --warn-soft:#fdf3dc;
+  --display:"Zilla Slab",Rockwell,"Roboto Slab",Georgia,serif;
+  --text:"Commissioner","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"Red Hat Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#10141c; --card:#191f2a; --card-2:#1e2532;
+  --ink:#e7eaf0; --ink-2:#b6bdca; --ink-3:#8a92a2; --line:#2a3242; --line-2:#3a4457;
+  --bic:#8eacff; --bic-ink:#0f1730; --bic-soft:#1f2a46;
+  --red:#e2716c; --rule:#26354b;
+  --t-mem:#1f3350; --t-org:#3a3218; --t-ent:#1d3627; --t-ens:#3c2230;
+  --t-mem-ink:#a9c8f0; --t-org-ink:#e8c868; --t-ent-ink:#8fd6a8; --t-ens-ink:#f0a8c0;
+  --ok:#6ccb95; --mid:#e3b25d; --low:#8a92a2; --warn-soft:#352b14;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#10141c; --card:#191f2a; --card-2:#1e2532;
+  --ink:#e7eaf0; --ink-2:#b6bdca; --ink-3:#8a92a2; --line:#2a3242; --line-2:#3a4457;
+  --bic:#8eacff; --bic-ink:#0f1730; --bic-soft:#1f2a46;
+  --red:#e2716c; --rule:#26354b;
+  --t-mem:#1f3350; --t-org:#3a3218; --t-ent:#1d3627; --t-ens:#3c2230;
+  --t-mem-ink:#a9c8f0; --t-org-ink:#e8c868; --t-ent-ink:#8fd6a8; --t-ens-ink:#f0a8c0;
+  --ok:#6ccb95; --mid:#e3b25d; --low:#8a92a2; --warn-soft:#352b14;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--text);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+a{color:var(--bic);text-underline-offset:3px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--bic);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem)}
+h2{font-size:1.6rem}
+h3{font-size:1.2rem}
+p{margin:0}
+.muted{color:var(--ink-3)}
+.small{font-size:.875rem}
+.mono{font-family:var(--mono)}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.prose{max-width:66ch}
+.stack{display:flex;flex-direction:column;gap:12px}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px 20px;min-height:64px;flex-wrap:wrap;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:700;font-size:1.25rem;white-space:nowrap}
+.brand svg{flex:none}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{padding:8px 11px;border-radius:6px;color:var(--ink-2);text-decoration:none;font-weight:500;font-size:.95rem;white-space:nowrap}
+nav.tabs a:hover{background:var(--card-2);color:var(--ink)}
+nav.tabs a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--red);border-radius:6px 6px 0 0}
+.badge{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:99px;background:var(--red);color:#fff;font-size:.72rem;font-weight:700;margin-left:4px}
+main{padding-block:28px 72px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:8px 16px;border-radius:8px;border:1.5px solid var(--line-2);background:var(--card);color:var(--ink);font-weight:600;font-size:.95rem;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--ink-3)}
+.btn.primary{background:var(--bic);border-color:var(--bic);color:var(--bic-ink)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.sm{min-height:34px;padding:5px 12px;font-size:.875rem}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--bic);padding-inline:6px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* bristol card */
+.bristol{position:relative;background:var(--card);border:1px solid var(--line);border-radius:4px;box-shadow:0 1px 0 var(--line),0 6px 18px -12px rgba(20,30,60,.25);overflow:hidden}
+.bristol.ruled{background-image:linear-gradient(var(--red),var(--red)),repeating-linear-gradient(to bottom,transparent 0 29px,var(--rule) 29px 30px);background-size:100% 2px,100% 100%;background-position:0 46px,0 47px;background-repeat:no-repeat,no-repeat;background-color:var(--card)}
+.bristol.ruled.top-only{background-size:100% 2px,100% 168px}
+.tab{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:3px}
+.tab.mem{background:var(--t-mem);color:var(--t-mem-ink)}
+.tab.org{background:var(--t-org);color:var(--t-org-ink)}
+.tab.ent{background:var(--t-ent);color:var(--t-ent-ink)}
+.tab.ens{background:var(--t-ens);color:var(--t-ens-ink)}
+.tab.neutral{background:var(--card-2);color:var(--ink-2);border:1px solid var(--line)}
+
+/* evidence meter */
+.ev{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-2);white-space:nowrap}
+.ev i{display:inline-flex;gap:2px}
+.ev i b{width:6px;height:14px;border-radius:1px;background:var(--line-2)}
+.ev.l3 i b{background:var(--ok)}
+.ev.l2 i b:nth-child(-n+2){background:var(--mid)}
+.ev.l1 i b:first-child{background:var(--low)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:12px 36px}
+.hero p.lead{font-size:1.15rem;color:var(--ink-2);margin-top:16px;max-width:52ch}
+.hero .row{margin-top:24px}
+.feature{padding:18px 22px 22px}
+.feature .head{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:28px}
+.feature h3{margin-top:26px;font-size:1.45rem}
+.feature p{margin-top:6px;color:var(--ink-2);line-height:30px}
+.cycle{display:grid;grid-template-columns:repeat(4,1fr);margin-top:18px;position:relative}
+.cycle::before{content:"";position:absolute;left:12.5%;right:12.5%;top:17px;height:2px;background:var(--bic)}
+.cycle div{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;text-align:center}
+.cycle b{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--card);border:2px solid var(--bic);font-family:var(--mono);font-size:.8rem;color:var(--bic)}
+.cycle div:first-child b{background:var(--bic);color:var(--bic-ink)}
+.cycle span{font-size:.78rem;color:var(--ink-3);line-height:1.3}
+
+.entries{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:8px}
+.entry{display:flex;flex-direction:column;gap:8px;padding:18px;text-decoration:none;color:var(--ink);border-top:4px solid var(--line)}
+.entry:hover{border-color:var(--ink-3)}
+.entry.mem{border-top-color:var(--t-mem-ink)}.entry.org{border-top-color:var(--t-org-ink)}.entry.ent{border-top-color:var(--t-ent-ink)}.entry.ens{border-top-color:var(--t-ens-ink)}
+.entry h3{font-size:1.15rem}
+.entry p{font-size:.92rem;color:var(--ink-2)}
+.entry .count{font-family:var(--mono);font-size:.78rem;color:var(--ink-3);margin-top:auto}
+
+.section{margin-top:48px}
+.section>h2{margin-bottom:6px}
+.section>.sub{color:var(--ink-2);margin-bottom:18px}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:16px}
+.principles div{border-left:2px solid var(--red);padding-left:14px}
+.principles h3{font-size:1.05rem;margin-bottom:4px}
+.principles p{font-size:.92rem;color:var(--ink-2)}
+
+/* page head */
+.phead{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.phead p{color:var(--ink-2);max-width:66ch}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{padding:6px 12px;border-radius:99px;border:1.5px solid var(--line-2);background:var(--card);cursor:pointer;font-size:.88rem;font-weight:500;color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.search{min-height:42px;padding:8px 12px;border:1.5px solid var(--line-2);border-radius:8px;background:var(--card);width:min(320px,100%)}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:18px}
+
+/* method grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.mcard{display:flex;flex-direction:column;gap:10px;padding:16px 18px 18px;text-decoration:none;color:var(--ink);min-width:0}
+.mcard .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.mcard h3{font-size:1.2rem;margin-top:4px}
+.mcard p{color:var(--ink-2);font-size:.95rem}
+.mcard .foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:8px;border-top:1px dashed var(--line)}
+.mcard:hover{border-color:var(--line-2)}
+.empty{padding:28px;text-align:center;color:var(--ink-3);border:1.5px dashed var(--line-2);border-radius:6px}
+
+/* fiche detail */
+.back{display:inline-flex;align-items:center;gap:6px;font-size:.92rem;font-weight:600;text-decoration:none;margin-bottom:14px}
+.fiche{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:32px;align-items:start}
+.fiche-card{padding:18px 26px 28px}
+.fiche-card .head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;min-height:28px}
+.fiche-card h1{margin-top:26px;font-size:clamp(1.8rem,1.4rem + 1.6vw,2.4rem);line-height:1.2}
+.fiche-card .bref{margin-top:12px;font-size:1.12rem;line-height:30px;color:var(--ink-2)}
+.block{margin-top:30px}
+.block h2{font-size:1.25rem;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:10px;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--bic);color:var(--bic);font-family:var(--mono);font-size:.78rem;margin-top:1px}
+ul.dash{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+ul.dash li::marker{color:var(--red)}
+.study{padding:14px 16px;border-radius:6px;background:var(--card-2);border:1px solid var(--line)}
+.study+.study{margin-top:10px}
+.study .who{font-family:var(--mono);font-size:.78rem;color:var(--ink-3);margin-bottom:4px}
+.study p{font-size:.95rem}
+sup a{font-family:var(--mono);font-size:.72rem;text-decoration:none;margin-left:2px}
+.aside{display:flex;flex-direction:column;gap:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px)}
+.aside .box{padding:16px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+.aside .box h3{font-size:1rem;margin-bottom:8px}
+.aside a.rel{display:block;padding:6px 0;text-decoration:none;font-weight:500;border-top:1px dashed var(--line)}
+.aside a.rel:first-of-type{border-top:0}
+ol.src{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:.88rem;color:var(--ink-2)}
+ol.src li{overflow-wrap:anywhere}
+.legend{display:flex;flex-direction:column;gap:8px;font-size:.85rem}
+
+/* tools */
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.tool{display:flex;flex-direction:column;gap:10px;padding:18px;min-width:0}
+.tool .meta{display:flex;gap:6px;flex-wrap:wrap}
+.tool p{color:var(--ink-2);font-size:.95rem}
+.tool .row{margin-top:auto;padding-top:6px}
+.tool.featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;padding:22px}
+.tag{display:inline-flex;align-items:center;font-size:.78rem;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--card-2);border:1px solid var(--line);color:var(--ink-2)}
+.tag.free{background:var(--t-ent);border-color:transparent;color:var(--t-ent-ink)}
+.tag.part{background:var(--warn-soft);border-color:transparent;color:var(--mid)}
+
+/* tutorial */
+.tabsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.tabsgrid .t{padding:14px 16px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+.tabsgrid .t b{display:block;font-family:var(--display);font-size:1.08rem;margin-bottom:4px}
+.tabsgrid .t p{font-size:.9rem;color:var(--ink-2)}
+.notice{padding:14px 16px;border-radius:6px;background:var(--bic-soft);color:var(--ink);font-size:.95rem}
+.notice.warn{background:var(--warn-soft)}
+.scale{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px;max-width:520px}
+.scale div{padding:10px;border-radius:6px;border:1px solid var(--line);background:var(--card);text-align:center}
+.scale b{display:block;font-family:var(--mono);font-size:1.1rem;color:var(--bic)}
+.scale span{font-size:.8rem;color:var(--ink-3)}
+.tablewrap{overflow-x:auto}
+
+/* board */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
+.post{padding:16px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.post .meta{display:flex;gap:6px;flex-wrap:wrap}
+.post p{overflow-wrap:anywhere}
+.post .contact{font-family:var(--mono);font-size:.88rem;padding:6px 10px;background:var(--card-2);border-radius:4px;user-select:all;overflow-wrap:anywhere}
+.retour dl{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr);gap:6px 16px;margin:6px 0 0}
+.retour dt{font-weight:600;font-size:.9rem;color:var(--ink-2)}
+.retour dd{margin:0;overflow-wrap:anywhere}
+
+/* forms */
+form.f{display:flex;flex-direction:column;gap:16px;padding:22px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-weight:600;font-size:.95rem}
+.field .hint{font-size:.85rem;color:var(--ink-3)}
+.field input,.field select,.field textarea{min-height:44px;padding:9px 12px;border:1.5px solid var(--line-2);border-radius:8px;background:var(--card);width:100%;max-width:100%}
+.field textarea{min-height:110px;resize:vertical;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.types{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.types label{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border:1.5px solid var(--line-2);border-radius:8px;cursor:pointer;background:var(--card);font-weight:500;font-size:.92rem}
+.types input{margin-top:4px;accent-color:var(--bic)}
+.types label:has(input:checked){border-color:var(--bic);box-shadow:inset 0 0 0 1px var(--bic)}
+.ok{padding:14px 16px;border-radius:6px;background:var(--t-ent);color:var(--t-ent-ink);font-weight:500}
+.err{padding:12px 14px;border-radius:6px;background:var(--warn-soft);color:var(--ink)}
+.mine{display:flex;flex-direction:column;gap:8px}
+.mine .it{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);font-size:.9rem;flex-wrap:wrap}
+.st{font-family:var(--mono);font-size:.75rem;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.st.wait{background:var(--warn-soft);color:var(--mid)}
+.st.pub{background:var(--t-ent);color:var(--t-ent-ink)}
+.st.no{background:var(--card-2);color:var(--ink-3)}
+
+/* review */
+.rv{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.rv dl{display:grid;grid-template-columns:minmax(110px,160px) minmax(0,1fr);gap:4px 14px;margin:0;font-size:.92rem}
+.rv dt{color:var(--ink-3)}
+.rv dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+
+.charte{counter-reset:c;display:flex;flex-direction:column;gap:18px;list-style:none;padding:0;margin:0}
+.charte li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px}
+.charte li::before{counter-increment:c;content:counter(c);font-family:var(--display);font-weight:700;font-size:1.6rem;color:var(--red);line-height:1}
+.charte h3{font-size:1.1rem;margin-bottom:4px}
+.charte p{color:var(--ink-2)}
+
+footer{border-top:1px solid var(--line);padding-block:22px;color:var(--ink-3);font-size:.85rem}
+
+@media (max-width:860px){
+  nav.tabs{order:3;flex-basis:100%;margin-inline:-6px}
+  .top .wrap>.btn{margin-left:auto}
+  .hero,.fiche,.cols,.tool.featured{grid-template-columns:1fr}
+  .entries{grid-template-columns:1fr 1fr}
+  .principles{grid-template-columns:1fr}
+  .aside{position:static}
+}
+@media (max-width:520px){
+  .entries{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  .retour dl,.rv dl{grid-template-columns:1fr}
+  .fiche-card{padding:16px 18px 24px}
+  .scale{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .mcard,.entry,.btn{transition:border-color .15s,filter .15s,transform .15s}
+  .mcard:hover,.entry:hover{transform:translateY(-2px)}
+}
+</style>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#accueil" aria-label="Methodocs, accueil">
+    <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="5" y="3" width="22" height="16" rx="2" style="fill:var(--t-mem);stroke:var(--line-2)"/><rect x="3" y="9" width="22" height="16" rx="2" style="fill:var(--card);stroke:var(--ink-2);stroke-width:1.4"/><line x1="3.7" y1="14" x2="24.3" y2="14" style="stroke:var(--red);stroke-width:1.6"/><line x1="7" y1="18" x2="21" y2="18" style="stroke:var(--rule);stroke-width:1.4"/><line x1="7" y1="21.5" x2="17" y2="21.5" style="stroke:var(--rule);stroke-width:1.4"/></svg>
+    Methodocs
+  </a>
+  <nav class="tabs" id="tabs" aria-label="Rubriques"></nav>
+  <a class="btn primary sm" href="#proposer">Proposer</a>
+</div></header>
+
+<main><div class="wrap" id="app"></div></main>
+<footer><div class="wrap">Prototype. Gratuit, sans publicité. Chaque fiche cite ses sources ; signale une erreur avec « Proposer une correction ».</div></footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= Contenu ================= */
+var CATS = {
+  mem:{t:"Mémoriser"}, org:{t:"S’organiser"}, ent:{t:"S’entraîner"}, ens:{t:"Ensemble"}
+};
+var EV = {
+  3:"Preuves solides", 2:"Preuves moyennes", 1:"Preuves limitées", 0:"Conseil pratique"
+};
+var SRC = {
+  dunlosky:{c:"Dunlosky J, Rawson KA, Marsh EJ, Nathan MJ, Willingham DT. Improving students’ learning with effective learning techniques. Psychological Science in the Public Interest, 2013 ; 14(1). Présentation par l’Association for Psychological Science.", u:"https://www.psychologicalscience.org/news/releases/which-study-strategies-make-the-grade.html"},
+  roediger:{c:"Roediger HL, Karpicke JD. Test-enhanced learning: taking memory tests improves long-term retention. Psychological Science, 2006 ; 17(3) : 249-255.", u:"https://pubmed.ncbi.nlm.nih.gov/16507066/"},
+  cepeda:{c:"Cepeda NJ, Pashler H, Vul E, Wixted JT, Rohrer D. Distributed practice in verbal recall tasks: a review and quantitative synthesis. Psychological Bulletin, 2006 ; 132(3) : 354-380.", u:"https://pubmed.ncbi.nlm.nih.gov/16719566/"},
+  rohrer:{c:"Rohrer D, Taylor K. The shuffling of mathematics problems improves learning. Instructional Science, 2007 ; 35(6) : 481-498.", u:"https://digitalcommons.usf.edu/psy_facpub/1767/"},
+  deng:{c:"Deng F, Gluckstein JA, Larsen DP. Student-directed retrieval practice is a predictor of medical licensing examination performance. Perspectives on Medical Education, 2015 ; 4(6).", u:"https://pubmed.ncbi.nlm.nih.gov/26498443/"},
+  zhang:{c:"Zhang Y, Maconochie M. A meta-analysis of peer-assisted learning on examination performance in clinical knowledge and skills education. BMC Medical Education, 2022 ; 22 : 147.", u:"https://doi.org/10.1186/s12909-022-03183-3"},
+  madrazo:{c:"Madrazo L, Lee CB, McConnell M, Khamisa K, Pugh D. No observed effect of a student-led mock objective structured clinical examination on subsequent performance scores in medical students in Canada. Journal of Educational Evaluation for Health Professions, 2019 ; 16 : 14.", u:"https://doi.org/10.3352/jeehp.2019.16.14"},
+  biwer:{c:"Biwer F, Wiradhany W, oude Egbrink MGA, de Bruin ABH. Understanding effort regulation: comparing ‘Pomodoro’ breaks and self-regulated breaks. British Journal of Educational Psychology, 2023 ; 93(S2) : 353-367.", u:"https://pubmed.ncbi.nlm.nih.gov/36859717/"},
+  lisa:{c:"Uness. Ouverture du livret LiSA (Livret de suivi des apprentissages), communiqué, mars 2022.", u:"https://www.uness.fr/sites/default/files/inline-files/CP%20-ouverture%20uness%20livret%20LiSA-%20mars%202022.pdf"},
+  anki:{c:"AnkiMobile Flashcards, fiche App Store (Ankitects Pty Ltd), consultée le 24 octobre 2026.", u:"https://apps.apple.com/app/id373493387"}
+};
+
+var METHODS = [
+{id:"se-tester", cat:"mem", dom:"Toutes études", ev:3,
+ titre:"Se tester plutôt que relire",
+ bref:"Chercher une réponse de mémoire fixe mieux les connaissances que relire la même page, même quand on se trompe.",
+ faire:["Ferme la fiche et écris tout ce dont tu te souviens, sans regarder.",
+        "Compare avec la fiche et complète au stylo d’une autre couleur ce qui manquait.",
+        "Fais des QCM ou des cas cliniques sur l’item, puis lis toute la correction, y compris des questions réussies.",
+        "Note chaque erreur avec une phrase : pourquoi tu t’es trompé, et ce qu’il fallait retenir."],
+ etudes:[
+  {s:"roediger", w:"2 expériences, étudiants lisant des textes", t:"Relire faisait mieux qu’un test quand l’évaluation avait lieu 5 minutes après. À 2 jours et à 1 semaine, c’était l’inverse : les étudiants qui s’étaient testés retenaient nettement plus. Relire donnait aussi une impression de maîtrise plus forte, sans le bénéfice à distance."},
+  {s:"dunlosky", w:"Revue de 10 techniques d’apprentissage", t:"Se tester fait partie des deux techniques jugées les plus utiles, avec l’espacement des révisions, sur des publics et des matières variés."},
+  {s:"deng", w:"72 étudiants en médecine, une faculté américaine, questionnaire", t:"Le nombre de QCM faits et le nombre de cartes Anki vues étaient associés à un meilleur score à l’examen national (Step 1). Étude d’association : elle ne prouve pas que l’un cause l’autre."}],
+ pieges:["Se tester avant d’avoir compris : commence par une lecture active, puis teste-toi.",
+         "Enchaîner les QCM sans lire la correction : c’est la correction qui apprend.",
+         "Se rassurer parce que la fiche « paraît connue » à la relecture."],
+ liens:["espacer","flashcards","relire"]},
+
+{id:"espacer", cat:"mem", dom:"Toutes études", ev:3,
+ titre:"Espacer les révisions",
+ bref:"Revoir une notion à intervalles de plus en plus longs (par exemple J1, J7, J30) retient mieux que tout revoir d’un bloc.",
+ faire:["Le jour où tu fais une fiche (J0), programme tout de suite ses révisions : J1, J7, J30.",
+        "À chaque échéance, relis brièvement puis teste-toi (QCM, récitation).",
+        "Plus l’examen est loin, plus tu peux allonger les intervalles.",
+        "Garde une place chaque jour pour les révisions dues avant d’ajouter des fiches nouvelles."],
+ etudes:[
+  {s:"cepeda", w:"Méta-analyse : 839 comparaisons, 317 expériences, 184 articles", t:"Répartir l’apprentissage en plusieurs séances fait mieux retenir que tout concentrer en une. L’écart idéal entre deux séances augmente avec le délai qui reste avant le test."},
+  {s:"dunlosky", w:"Revue de 10 techniques d’apprentissage", t:"L’espacement des révisions est l’une des deux techniques jugées les plus utiles."}],
+ pieges:["Laisser s’accumuler les révisions en retard : si ça déborde, ralentis les nouvelles fiches plutôt que de sauter les révisions.",
+         "Espacer des relectures passives : chaque révision doit comporter un test.",
+         "Copier un calendrier trop chargé : mieux vaut un rythme tenu qu’un rythme idéal abandonné."],
+ liens:["se-tester","flashcards","pauses"], outil:"revisions-edn"},
+
+{id:"alterner", cat:"ent", dom:"Toutes études", ev:2,
+ titre:"Mélanger les sujets d’entraînement",
+ bref:"Mélanger des questions de plusieurs items oblige à reconnaître de quel problème il s’agit, comme le jour de l’examen.",
+ faire:["Une fois un item appris, entraîne-toi sur des séries qui mélangent plusieurs items ou spécialités.",
+        "Avant de répondre, demande-toi : de quel item relève cette question ?",
+        "Garde les séries par item pour la première découverte, puis passe aux séries mélangées."],
+ etudes:[
+  {s:"rohrer", w:"2 expériences, étudiants, exercices de mathématiques", t:"Une semaine plus tard, les étudiants qui s’étaient entraînés sur des exercices mélangés réussissaient beaucoup mieux que ceux qui avaient travaillé un type d’exercice à la fois."},
+  {s:"dunlosky", w:"Revue de 10 techniques d’apprentissage", t:"L’alternance est jugée d’utilité moyenne : les preuves sont surtout en mathématiques et en tâches de classement, moins dans les autres matières."}],
+ pieges:["C’est plus difficile sur le moment : un score plus bas pendant l’entraînement est attendu.",
+         "Mélanger trop tôt, avant d’avoir appris les bases de chaque item."],
+ liens:["se-tester","espacer"]},
+
+{id:"flashcards", cat:"mem", dom:"Toutes études", ev:2,
+ titre:"Les cartes à répétition espacée",
+ bref:"Des cartes question-réponse qu’un logiciel (Anki, par exemple) te présente au bon moment, en combinant test et espacement.",
+ faire:["Une carte = une question précise et une réponse courte. Coupe les listes en plusieurs cartes.",
+        "Écris tes cartes toi-même, ou vérifie la source d’un paquet partagé avant de l’utiliser.",
+        "Fais tes cartes dues chaque jour : 20 minutes régulières valent mieux qu’une séance de 3 heures par semaine.",
+        "Quand une carte échoue souvent, reviens à la fiche ou au cours pour comprendre."],
+ etudes:[
+  {s:"deng", w:"72 étudiants en médecine, une faculté américaine, questionnaire", t:"31 % utilisaient Anki. Le nombre de cartes différentes vues était associé au score du Step 1, à côté du nombre de QCM faits. Une seule faculté, données déclarées, pas de lien de cause démontré."},
+  {s:"anki", w:"Prix et plateformes", t:"Anki est gratuit et libre sur ordinateur et sur Android ; l’application iPhone (AnkiMobile) est payante et finance le développement."}],
+ pieges:["Créer des milliers de cartes sans les comprendre.",
+         "Laisser le retard s’accumuler sur plusieurs jours : la pile devient décourageante.",
+         "Utiliser un paquet partagé non vérifié, ou issu de supports payants copiés."],
+ liens:["se-tester","espacer"], outil:"anki"},
+
+{id:"expliquer", cat:"ens", dom:"Toutes études", ev:2,
+ titre:"S’expliquer et expliquer aux autres",
+ bref:"Se demander « pourquoi ? » et expliquer une notion à quelqu’un oblige à relier les connaissances entre elles.",
+ faire:["Pour chaque notion, écris en une phrase pourquoi elle est vraie (le mécanisme, la physiopathologie).",
+        "En groupe de 3 ou 4 : chacun présente un item en 10 minutes, puis le groupe le teste avec 5 questions.",
+        "Change les rôles à chaque séance.",
+        "Note les questions auxquelles personne n’a su répondre et cherche-les dans une source fiable."],
+ etudes:[
+  {s:"dunlosky", w:"Revue de 10 techniques d’apprentissage", t:"S’interroger sur le « pourquoi » et s’expliquer ses propres raisonnements sont jugés d’utilité moyenne."},
+  {s:"zhang", w:"Méta-analyse : 13 essais randomisés, 2 003 étudiants en médecine", t:"L’apprentissage entre pairs donnait des résultats aux examens au moins équivalents à un enseignement par des enseignants. Le gain global dépendait surtout d’une étude ; les auteurs le présentent comme un complément, pas un remplacement."}],
+ pieges:["Un groupe qui discute sans se tester : finissez toujours par des questions.",
+         "Une erreur répétée par tout le groupe : vérifiez dans le référentiel du collège."],
+ liens:["ecos","se-tester"]},
+
+{id:"relire", cat:"mem", dom:"Toutes études", ev:3,
+ titre:"Relire et surligner : utiles, mais pas suffisants",
+ bref:"Relire et surligner donnent l’impression d’apprendre ; seuls, ils font peu progresser. Ils servent mieux de point de départ.",
+ faire:["Surligne seulement à la deuxième lecture, une idée par paragraphe au plus.",
+        "Transforme chaque passage surligné en question au dos de la fiche.",
+        "Relis juste avant de te tester, pas à la place de te tester."],
+ etudes:[
+  {s:"dunlosky", w:"Revue de 10 techniques d’apprentissage", t:"Relire, surligner et résumer font partie des cinq techniques jugées de faible utilité."},
+  {s:"roediger", w:"2 expériences, étudiants lisant des textes", t:"Relire rendait les étudiants plus confiants, sans les faire mieux retenir à une semaine que le fait de se tester."}],
+ pieges:["Mesurer son travail au nombre de pages relues.",
+         "Refaire de belles fiches au lieu de les utiliser."],
+ liens:["se-tester","espacer"]},
+
+{id:"ecos", cat:"ent", dom:"Santé", ev:1,
+ titre:"Préparer les ECOS entre étudiants",
+ bref:"S’entraîner en trio (candidat, patient, évaluateur) aide à se repérer. Les études ne montrent pas encore que cela, seul, fait monter la note.",
+ faire:["Formez des trios : un candidat, un patient standardisé, un évaluateur avec une grille.",
+        "Chronométrez chaque station comme le jour de l’épreuve.",
+        "Débriefez 5 minutes : deux points réussis, un point à travailler.",
+        "Tournez les rôles : évaluer les autres apprend aussi la grille.",
+        "Partez des situations de départ du programme pour choisir les stations."],
+ etudes:[
+  {s:"madrazo", w:"Étudiants en médecine d’une faculté canadienne, deux promotions", t:"Participer à un ECOS blanc organisé par des étudiants n’a pas changé la note à l’ECOS officiel. La note à l’ECOS blanc était en revanche liée à la note officielle (r = 0,52) : il sert à savoir où l’on en est."},
+  {s:"zhang", w:"Méta-analyse : 13 essais randomisés, 2 003 étudiants en médecine", t:"L’apprentissage entre pairs, y compris sur les compétences cliniques, ne fait pas moins bien qu’un enseignement par des enseignants."}],
+ pieges:["Un évaluateur trop gentil : utilisez une vraie grille.",
+         "Jouer un patient à partir d’une histoire réelle : n’utilisez jamais d’informations sur un patient rencontré en stage."],
+ liens:["expliquer","alterner"]},
+
+{id:"pauses", cat:"org", dom:"Toutes études", ev:1,
+ titre:"Travailler par blocs, avec des pauses fixées",
+ bref:"Décider à l’avance la durée des blocs et des pauses (par exemple 25 min / 5 min) évite de s’épuiser sans s’en rendre compte.",
+ faire:["Avant chaque bloc, écris la tâche précise (par exemple : série J7 de l’item 224).",
+        "Choisis un rythme et tiens-le : 25 / 5, ou 50 / 10 pour les tâches longues.",
+        "Pendant la pause, lève-toi et éloigne-toi de l’écran.",
+        "Après 3 ou 4 blocs, fais une vraie coupure."],
+ etudes:[
+  {s:"biwer", w:"87 étudiants d’une université néerlandaise, une journée d’étude réelle", t:"Avec des pauses fixées à l’avance, les étudiants accomplissaient autant de travail qu’avec des pauses choisies au fil de l’eau, en moins de temps, et se disaient moins fatigués, plus concentrés et plus motivés. Une seule journée, une seule université."}],
+ pieges:["Couper au milieu d’un QCM chronométré : aligne les blocs sur les séries.",
+         "Prendre la pause sur le téléphone : elle repose moins."],
+ liens:["espacer","sans-prepa"]},
+
+{id:"sans-prepa", cat:"org", dom:"Santé", ev:0,
+ titre:"Ce qu’apporte une prépa privée, et comment le retrouver gratuitement",
+ bref:"Une prépa vend surtout un planning, de l’entraînement, un cadre et des corrections. Chacun de ces éléments peut se construire sans payer.",
+ faire:["Un planning : répartis les 367 items sur l’année avec un cycle J1 / J7 / J30 (voir l’outil Révisions EDN).",
+        "Des fiches : pars du livret LiSA (gratuit, objectifs de rang A et B) et du référentiel de chaque collège.",
+        "De l’entraînement : QCM de ta faculté, de ton tutorat ou de ta corpo, puis séries mélangées.",
+        "Un cadre : un binôme ou un groupe qui se retrouve à heure fixe (voir Entraide).",
+        "Des corrections : un carnet d’erreurs, et des ECOS en trio avec une grille."],
+ etudes:[
+  {s:"lisa", w:"Ressource officielle", t:"LiSA, livret gratuit d’Uness conçu avec la Conférence des doyens et les collèges d’enseignants, couvre les 367 items du programme avec des fiches imprimables et des objectifs classés en rang A et rang B. Accès avec ses identifiants universitaires."}],
+ pieges:["Comparer son rythme à celui des autres : un planning se juge à ce que tu peux tenir.",
+         "Rester seul : le cadre d’une prépa est surtout collectif."],
+ liens:["espacer","expliquer","pauses"], outil:"lisa"}
+];
+
+var TOOLS = [
+ {id:"revisions-edn", nom:"Révisions EDN", prix:"free", prixT:"Gratuit", qui:"Fait par un étudiant", desc:"Une page de révision pour l’EDN : pour chaque item, une fiche, puis une relecture et une série de 10 QCM à J1, J7 et J30. Carnet d’erreurs, suivi par collège et par rang A / B.", lien:"#revisions-edn", lienT:"Lire le tutoriel", interne:true},
+ {id:"lisa", nom:"LiSA (Uness)", prix:"free", prixT:"Gratuit", qui:"Ressource officielle", desc:"Livret de suivi des apprentissages du 2e cycle : les 367 items, des fiches imprimables et les objectifs de rang A et B. Connexion avec ses identifiants universitaires.", lien:"https://www.uness.fr", lienT:"Site d’Uness", src:"lisa"},
+ {id:"anki", nom:"Anki", prix:"part", prixT:"Gratuit sauf iPhone", qui:"Logiciel libre", desc:"Cartes question-réponse avec répétition espacée calculée automatiquement. Gratuit sur ordinateur et Android ; l’application iPhone est payante.", lien:"https://apps.ankiweb.net", lienT:"Site d’Anki", src:"anki"}
+];
+
+var EDN_TABS = [
+ ["Aujourd’hui","Le programme du jour : les fiches à relire et les séries de QCM dues, plus les épreuves commencées."],
+ ["QCM","Les séries de 10 questions par item, en mode chronométré (90 secondes par question, correction à la fin) ou avec la correction après chaque question."],
+ ["Carnet","Les questions, les propositions isolées ou les items entiers à retravailler, chacun avec ta note. Les propositions se révisent en Vrai / Faux."],
+ ["Suivi","Relectures faites, séries faites, score moyen, rang A comparé au rang B, objectifs de rang A testés, avancement par collège et par item."],
+ ["Fiches","Pour chaque item : la fiche, les objectifs LiSA, le cours, et les cases J1 / J7 / J30 à cocher après chaque relecture."],
+ ["Collèges","L’avancement collège par collège, chaque item passant de « À faire » à « Cycle J30 terminé »."],
+ ["Planning","Le planning de la promo : cours, conférences, examens et EDN blancs, quiz."]
+];
+var EDN_STEPS = [
+ "Choisis les items de la semaine en suivant le planning de ta faculté et un collège à la fois.",
+ "J0 : fais la fiche de l’item à partir de LiSA et du référentiel du collège. Repère les objectifs de rang A.",
+ "Programme les trois échéances : J1, J7 et J30.",
+ "À chaque échéance : relis la fiche une dizaine de minutes, puis fais la série de 10 QCM.",
+ "Après chaque série, mets dans le carnet les questions ratées avec une phrase : pourquoi tu t’es trompé.",
+ "Une fois par semaine, ouvre le suivi : rang A d’abord, puis les collèges en retard.",
+ "Si les relectures débordent, ralentis les nouvelles fiches plutôt que de sauter un J7 ou un J30."
+];
+
+/* Champs des formulaires selon le type */
+var FORMS = {
+ annonce:{t:"Une annonce d’entraide", d:"Chercher un binôme, un groupe, proposer son aide.", f:[
+   {k:"genre",l:"Je…",type:"select",o:["cherche un binôme ou un groupe","propose mon aide","cherche des partenaires pour les ECOS","propose de relire des fiches"],req:1},
+   {k:"filiere",l:"Filière",type:"select",o:["Médecine","Pharmacie","Maïeutique","Odontologie","Kinésithérapie","Soins infirmiers","Autre"],req:1,half:1},
+   {k:"annee",l:"Année",type:"text",ph:"ex. DFASM2, L2, 3e année",req:1,half:1},
+   {k:"lieu",l:"Ville ou « en ligne »",type:"text",ph:"ex. Lyon, ou en ligne",req:1},
+   {k:"message",l:"Ton annonce",type:"area",ph:"Ce que tu cherches ou proposes, le rythme, les items ou matières concernés.",req:1},
+   {k:"contact",l:"Comment te joindre",type:"text",ph:"Adresse universitaire ou pseudo (Discord…)",hint:"Visible par toutes les personnes qui ont le lien, une fois l’annonce publiée. Évite ton numéro de téléphone.",req:1}]},
+ retour:{t:"Un retour d’expérience", d:"Comment tu as préparé un examen : ce qui a marché, ce qui n’a pas marché.", f:[
+   {k:"examen",l:"Examen préparé",type:"text",ph:"ex. EDN, ECOS, partiels de L1",req:1,half:1},
+   {k:"filiere",l:"Filière et année",type:"text",ph:"ex. Médecine, DFASM3",req:1,half:1},
+   {k:"fait",l:"Ce que j’ai fait",type:"area",ph:"Ton organisation, tes outils, ton rythme.",req:1},
+   {k:"marche",l:"Ce qui a marché",type:"area",req:1},
+   {k:"pasmarche",l:"Ce qui n’a pas marché",type:"area",req:1},
+   {k:"cout",l:"Ce que ça m’a coûté",type:"text",ph:"Temps par jour, argent dépensé (0 € compte aussi)"},
+   {k:"conseil",l:"Un conseil",type:"area"},
+   {k:"signature",l:"Signature",type:"text",ph:"Prénom, initiales ou rien",hint:"Facultatif. Le retour peut rester anonyme."}]},
+ fiche:{t:"Une fiche méthode", d:"Une méthode, avec au moins une source.", f:[
+   {k:"titre",l:"Titre",type:"text",req:1},
+   {k:"bref",l:"En bref",type:"area",ph:"Deux phrases : ce qu’est la méthode et à quoi elle sert.",req:1},
+   {k:"faire",l:"Comment faire",type:"area",ph:"Les étapes, une par ligne.",req:1},
+   {k:"sources",l:"Sources",type:"area",ph:"Au moins une : étude, référentiel, livre. Avec le lien si possible.",req:1},
+   {k:"contact",l:"Contact pour la relecture",type:"text",hint:"Facultatif, jamais publié."}]},
+ outil:{t:"Un outil", d:"Un outil gratuit, avec un pas-à-pas si possible.", f:[
+   {k:"nom",l:"Nom",type:"text",req:1,half:1},
+   {k:"lien",l:"Lien",type:"text",ph:"https://…",half:1},
+   {k:"desc",l:"À quoi il sert",type:"area",req:1},
+   {k:"prix",l:"Prix",type:"select",o:["Gratuit","Gratuit en partie","Payant"],req:1},
+   {k:"tuto",l:"Tutoriel",type:"area",ph:"Comment s’en servir, étape par étape (facultatif)."},
+   {k:"contact",l:"Contact pour la relecture",type:"text",hint:"Facultatif, jamais publié."}]},
+ correction:{t:"Une correction", d:"Une erreur, une source manquante, une formulation à revoir.", f:[
+   {k:"page",l:"Page concernée",type:"text",ph:"ex. Espacer les révisions",req:1},
+   {k:"probleme",l:"Ce qui ne va pas",type:"area",req:1},
+   {k:"source",l:"Source",type:"area",ph:"Ce qui permet de vérifier."},
+   {k:"contact",l:"Contact pour la relecture",type:"text",hint:"Facultatif, jamais publié."}]}
+};
+var LABELS = {genre:"Je", filiere:"Filière", annee:"Année", lieu:"Lieu", message:"Annonce", contact:"Contact", examen:"Examen", fait:"Ce que j’ai fait", marche:"Ce qui a marché", pasmarche:"Ce qui n’a pas marché", cout:"Coût", conseil:"Conseil", signature:"Signature", titre:"Titre", bref:"En bref", faire:"Comment faire", sources:"Sources", nom:"Nom", lien:"Lien", desc:"Description", prix:"Prix", tuto:"Tutoriel", page:"Page", probleme:"Problème", source:"Source"};
+
+/* ================= Utilitaires ================= */
+function h(tag, attrs){
+  var el = document.createElement(tag);
+  if(attrs) for(var k in attrs){var v=attrs[k]; if(v==null||v===false) continue;
+    if(k==="class") el.className=v; else if(k==="text") el.textContent=v; else if(k==="html") el.innerHTML=v;
+    else if(k.slice(0,2)==="on") el.addEventListener(k.slice(2),v); else el.setAttribute(k,v===true?"":v);}
+  for(var i=2;i<arguments.length;i++) add(el, arguments[i]);
+  return el;
+}
+function add(el,c){ if(c==null||c===false) return; if(Array.isArray(c)) c.forEach(function(x){add(el,x)}); else el.append(c.nodeType?c:document.createTextNode(String(c))); }
+function ev(level){ return h("span",{class:"ev l"+level,title:EV[level]}, level? h("i",{"aria-hidden":"true"},h("b"),h("b"),h("b")) : null, EV[level]); }
+function tab(cat){ return h("span",{class:"tab "+cat}, CATS[cat].t); }
+function fdate(iso){ try{ return new Date(iso).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return ""; } }
+function method(id){ return METHODS.find(function(m){return m.id===id}); }
+function safeUrl(u){ return /^https?:\/\//i.test(u||"") ? u : null; }
+function ext(u,t,cls){ return h("a",{href:u,target:"_blank",rel:"noopener",class:cls||null},t); }
+function store(k,v){ try{ if(v===undefined) return JSON.parse(localStorage.getItem(k)||"null"); localStorage.setItem(k,JSON.stringify(v)); }catch(e){ return null; } }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+
+/* ================= État ================= */
+var S = { db:null, user:null, uid:null, canWrite:null, admin:false, owner:false, dbState:"loading",
+  publie:[], gotPublie:false, mine:null, queue:[], filter:store("mec-filter")||"all", q:"", boardF:"all", sent:null, err:null, busy:false };
+
+/* ================= Navigation ================= */
+var NAV = [["accueil","Accueil"],["methodes","Méthodes"],["outils","Outils"],["entraide","Entraide"],["retours","Retours"],["principes","Principes"]];
+function route(){ var r=(location.hash||"").replace(/^#/,""); return r||"accueil"; }
+function section(r){ if(r.indexOf("m-")===0) return "methodes"; if(r==="revisions-edn") return "outils"; if(r.indexOf("proposer")===0) return "proposer"; return r; }
+function renderNav(){
+  var cur=section(route()); var nav=document.getElementById("tabs"); nav.replaceChildren();
+  NAV.forEach(function(n){ nav.append(h("a",{href:"#"+n[0],"aria-current":cur===n[0]?"page":null},n[1])); });
+  if(S.admin){ var n=pending().length; nav.append(h("a",{href:"#relecture","aria-current":cur==="relecture"?"page":null},"Relecture", n? h("span",{class:"badge"},n):null)); }
+}
+
+/* ================= Vues ================= */
+function viewAccueil(){
+  var root=h("div");
+  var feat=h("a",{class:"bristol ruled feature",href:"#revisions-edn",style:"text-decoration:none;color:inherit;display:block"},
+    h("div",{class:"head"}, h("span",{class:"eyebrow"},"Outil à la une"), h("span",{class:"tag free"},"Gratuit")),
+    h("h3",null,"Révisions EDN"),
+    h("p",null,"Une fiche par item, puis une relecture et 10 QCM à chaque échéance. Le tutoriel montre comment reprendre la méthode."),
+    h("div",{class:"cycle","aria-label":"Cycle de révision : J0, J1, J7, J30"},
+      [["J0","la fiche"],["J1","relire + QCM"],["J7","relire + QCM"],["J30","relire + QCM"]].map(function(c){return h("div",null,h("b",null,c[0]),h("span",null,c[1]))})));
+  root.append(h("section",{class:"hero"},
+    h("div",null,
+      h("p",{class:"eyebrow"},"Pour les étudiants en santé, et au-delà"),
+      h("h1",{style:"margin-top:10px"},"Des méthodes de travail sourcées, des outils gratuits, et de l’entraide entre étudiants."),
+      h("p",{class:"lead"},"Ce que coûte une prépa ou un coaching privé, on peut souvent le construire ensemble : un planning, de l’entraînement, un groupe, des corrections. Ici, chacun partage ce qui marche pour lui, avec ses sources."),
+      h("div",{class:"row"}, h("a",{class:"btn primary",href:"#methodes"},"Voir les méthodes"), h("a",{class:"btn",href:"#entraide"},"Trouver un binôme"))),
+    feat));
+
+  var nAnn=published("annonce").length, nRet=published("retour").length;
+  root.append(h("section",{class:"section"},
+    h("div",{class:"entries"},
+      entry("mem","#methodes","Méthodes","Ce qui aide à apprendre et à retenir, avec ce que disent les études.", (METHODS.length+published("fiche").length)+" fiches"),
+      entry("org","#outils","Outils","Des outils gratuits, chacun avec un pas-à-pas pour se l’approprier.", (TOOLS.length+published("outil").length)+" outils"),
+      entry("ens","#entraide","Entraide","Trouver un binôme, un groupe de travail, des partenaires pour les ECOS.", S.gotPublie? nAnn+" annonce"+(nAnn>1?"s":""):"Annonces relues"),
+      entry("ent","#retours","Retours d’expérience","Comment d’autres ont préparé leurs examens : ce qui a marché, et le reste.", S.gotPublie? nRet+" retour"+(nRet>1?"s":""):"Retours relus"))));
+
+  root.append(h("section",{class:"section"},
+    h("h2",null,"Les règles du site"),
+    h("div",{class:"principles"},
+      h("div",null,h("h3",null,"Gratuit, toujours"),h("p",null,"Pas de vente, pas de publicité, pas de cours payants dans l’entraide.")),
+      h("div",null,h("h3",null,"Sourcé"),h("p",null,"Chaque fiche dit d’où elle vient et à quel point c’est prouvé.")),
+      h("div",null,h("h3",null,"Relu avant publication"),h("p",null,"Tout le monde peut proposer ; rien n’est publié sans relecture."))),
+    h("p",{style:"margin-top:18px"},h("a",{href:"#principes"},"Lire tous les principes"))));
+  return root;
+}
+function entry(cls,href,t,d,c){ return h("a",{class:"bristol entry "+cls,href:href},h("h3",null,t),h("p",null,d),h("span",{class:"count"},c)); }
+
+function viewMethodes(){
+  var root=h("div");
+  root.append(h("div",{class:"phead"},h("h1",null,"Méthodes"),
+    h("p",null,"Chaque fiche explique comment faire, ce que disent les études, et les pièges courants. Les barres indiquent la solidité des preuves, pas l’efficacité de la méthode.")));
+  var bar=h("div",{class:"toolbar"});
+  var chips=h("div",{class:"chips",role:"group","aria-label":"Filtrer par thème"});
+  [["all","Toutes"]].concat(Object.keys(CATS).map(function(k){return [k,CATS[k].t]})).concat([["sante","Santé"]]).forEach(function(c){
+    chips.append(h("button",{class:"chip",type:"button","aria-pressed":String(S.filter===c[0]),onclick:function(){S.filter=c[0];store("mec-filter",c[0]);render()}},c[1]));
+  });
+  var search=h("input",{class:"search",id:"q",type:"search",placeholder:"Chercher une méthode",value:S.q,"aria-label":"Chercher une méthode",oninput:function(e){S.q=e.target.value;drawGrid()}});
+  bar.append(chips,search); root.append(bar);
+  var grid=h("div",{class:"grid",id:"mgrid"}); root.append(grid);
+  function drawGrid(){
+    var q=S.q.trim().toLowerCase();
+    var list=METHODS.filter(function(m){
+      if(S.filter==="sante"&&m.dom!=="Santé") return false;
+      if(S.filter!=="all"&&S.filter!=="sante"&&m.cat!==S.filter) return false;
+      return !q || (m.titre+" "+m.bref).toLowerCase().indexOf(q)>=0;
+    });
+    grid.replaceChildren();
+    list.forEach(function(m){
+      grid.append(h("a",{class:"bristol mcard",href:"#m-"+m.id},
+        h("div",{class:"head"},tab(m.cat), m.dom==="Santé"? h("span",{class:"tag"},"Santé"):null),
+        h("h3",null,m.titre), h("p",null,m.bref),
+        h("div",{class:"foot"},ev(m.ev),h("span",{class:"small muted mono"},m.etudes.length+" source"+(m.etudes.length>1?"s":"")))));
+    });
+    if(!list.length) grid.append(h("div",{class:"empty",style:"grid-column:1/-1"},"Aucune fiche pour ce filtre."));
+  }
+  drawGrid();
+  var extra=published("fiche");
+  root.append(h("section",{class:"section"},h("h2",null,"Proposées par la communauté"),
+    h("p",{class:"sub"},"Fiches envoyées par des étudiants, relues avant publication."),
+    extra.length? h("div",{class:"stack"},extra.map(pubFiche)) :
+      h("div",{class:"empty"},"Pas encore de fiche proposée. ",h("a",{href:"#proposer-fiche"},"Proposer une méthode"))));
+  return root;
+}
+function pubFiche(p){
+  var c=p.champs||{};
+  return h("article",{class:"bristol post"},h("div",{class:"meta"},h("span",{class:"tab neutral"},"Proposée"),h("span",{class:"small muted"},"Publiée le "+fdate(p.publieLe))),
+    h("h3",null,c.titre||"Sans titre"),h("p",null,c.bref||""),
+    c.faire? h("ul",{class:"dash"},String(c.faire).split(/\n+/).filter(Boolean).map(function(l){return h("li",null,l)})):null,
+    c.sources? h("p",{class:"small muted",style:"white-space:pre-wrap"},"Sources : "+c.sources):null);
+}
+
+function viewFiche(id){
+  var m=method(id); if(!m) return h("div",{class:"empty"},"Cette fiche n’existe pas. ",h("a",{href:"#methodes"},"Voir les méthodes"));
+  var srcList=[]; m.etudes.forEach(function(e){ if(srcList.indexOf(e.s)<0) srcList.push(e.s); });
+  var card=h("article",{class:"bristol ruled top-only fiche-card"},
+    h("div",{class:"head"},tab(m.cat),h("span",{class:"tag"},m.dom),ev(m.ev)),
+    h("h1",null,m.titre), h("p",{class:"bref"},m.bref),
+    h("div",{class:"block"},h("h2",null,"Comment faire"),h("ol",{class:"steps"},m.faire.map(function(s){return h("li",null,h("span",null,s))}))),
+    h("div",{class:"block"},h("h2",null,"Ce que disent les études"),
+      m.etudes.map(function(e){ var n=srcList.indexOf(e.s)+1; return h("div",{class:"study"},h("div",{class:"who"},e.w),h("p",null,e.t,h("sup",null,h("a",{href:"#src-"+m.id+"-"+n,"aria-label":"Source "+n},"["+n+"]")))); })),
+    h("div",{class:"block"},h("h2",null,"Pièges courants"),h("ul",{class:"dash"},m.pieges.map(function(p){return h("li",null,p)}))),
+    h("div",{class:"block"},h("h2",null,"Sources"),h("ol",{class:"src"},srcList.map(function(k,i){var s=SRC[k];return h("li",{id:"src-"+m.id+"-"+(i+1)},s.c," ",ext(s.u,"Lien"))}))));
+  var aside=h("aside",{class:"aside"});
+  if(m.outil){ var t=TOOLS.find(function(x){return x.id===m.outil}); if(t) aside.append(h("div",{class:"box"},h("h3",null,"Outil lié"),h("p",{class:"small",style:"margin-bottom:10px"},t.nom+" : "+t.prixT.toLowerCase()+"."), t.interne? h("a",{class:"btn sm primary",href:t.lien},t.lienT) : ext(t.lien,t.lienT,"btn sm"))); }
+  aside.append(h("div",{class:"box"},h("h3",null,"À lire ensuite"),m.liens.map(function(l){var x=method(l);return x? h("a",{class:"rel",href:"#m-"+x.id},x.titre):null})));
+  aside.append(h("div",{class:"box legend"},h("h3",null,"Solidité des preuves"),[3,2,1,0].map(function(l){return h("div",null,ev(l))}),
+    h("p",{class:"small muted"},"Solides : plusieurs études concordantes. Moyennes : résultats nets mais dans peu de matières. Limitées : une ou deux études. Conseil pratique : pas d’étude, expérience d’étudiants.")));
+  aside.append(h("div",{class:"box"},h("h3",null,"Une erreur ?"),h("p",{class:"small",style:"margin-bottom:10px"},"Une source manque, un chiffre est faux, une étape n’est pas claire."),
+    h("a",{class:"btn sm",href:"#proposer-correction",onclick:function(){S.prefill={page:m.titre}}},"Proposer une correction")));
+  return h("div",null,h("a",{class:"back",href:"#methodes"},"‹ Toutes les méthodes"),h("div",{class:"fiche"},card,aside));
+}
+
+function viewOutils(){
+  var root=h("div");
+  root.append(h("div",{class:"phead"},h("h1",null,"Outils"),h("p",null,"Des outils gratuits ou presque. Chacun vient avec ce qu’il fait, son prix réel et un pas-à-pas quand il existe.")));
+  var grid=h("div",{class:"tools"});
+  TOOLS.forEach(function(t,i){
+    var meta=h("div",{class:"meta"},h("span",{class:"tag "+t.prix},t.prixT),h("span",{class:"tag"},t.qui));
+    var link=t.interne? h("a",{class:"btn primary sm",href:t.lien},t.lienT) : ext(t.lien,t.lienT,"btn sm");
+    if(i===0){
+      grid.append(h("article",{class:"bristol ruled tool featured"},
+        h("div",{class:"stack"},meta,h("h2",{style:"margin-top:12px"},t.nom),h("p",{style:"line-height:30px"},t.desc),h("div",{class:"row"},link)),
+        h("div",{class:"cycle",style:"align-self:center"},[["J0","la fiche"],["J1","relire + QCM"],["J7","relire + QCM"],["J30","relire + QCM"]].map(function(c){return h("div",null,h("b",null,c[0]),h("span",null,c[1]))}))));
+    } else grid.append(h("article",{class:"bristol tool"},meta,h("h3",null,t.nom),h("p",null,t.desc),
+      t.src? h("p",{class:"small muted"},"Vérifié le 24 octobre 2026. ",ext(SRC[t.src].u,"Source")):null, h("div",{class:"row"},link)));
+  });
+  published("outil").forEach(function(p){ var c=p.champs||{}; var u=safeUrl(c.lien);
+    grid.append(h("article",{class:"bristol tool"},h("div",{class:"meta"},h("span",{class:"tag "+(c.prix==="Gratuit"?"free":"part")},c.prix||""),h("span",{class:"tag"},"Proposé")),
+      h("h3",null,c.nom||""),h("p",null,c.desc||""), c.tuto? h("details",null,h("summary",null,"Tutoriel"),h("p",{style:"white-space:pre-wrap;margin-top:8px"},c.tuto)):null,
+      u? h("div",{class:"row"},ext(u,"Ouvrir","btn sm")):null)); });
+  grid.append(h("a",{class:"empty",href:"#proposer-outil",style:"display:grid;place-items:center;text-decoration:none"},"Tu utilises un outil gratuit qui t’aide ? Propose-le avec son pas-à-pas."));
+  root.append(grid);
+  return root;
+}
+
+function viewEDN(){
+  var root=h("div");
+  root.append(h("a",{class:"back",href:"#outils"},"‹ Tous les outils"));
+  root.append(h("div",{class:"phead"},h("p",{class:"eyebrow"},"Tutoriel"),h("h1",null,"Révisions EDN"),
+    h("p",null,"Une page de révision construite par un étudiant de DFASM2 pour préparer l’EDN. Elle repose sur deux méthodes : se tester et espacer les révisions. Voici comment elle marche, et comment reprendre la méthode chez toi.")));
+  root.append(h("div",{class:"notice warn"},h("b",null,"Où en est l’outil. "),"La page actuelle est personnelle : ses fiches, ses QCM et ses résultats ne sont visibles que par son propriétaire. Une version vierge, où chacun range ses propres fiches et QCM, est en préparation. En attendant, la méthode se reproduit avec LiSA, un agenda et Anki (voir plus bas).",
+    S.owner? h("div",{style:"margin-top:10px"},ext("https://claude.ai/code/artifact/6f401c3e-cf6b-452c-a2a6-fb9ff1914677","Ouvrir ma version personnelle","btn sm")):null));
+
+  root.append(h("section",{class:"section"},h("h2",null,"Le cycle"),h("p",{class:"sub prose"},"Chaque item suit le même cycle. Les intervalles s’allongent, comme le recommandent les études sur l’espacement."),
+    h("div",{class:"bristol ruled",style:"padding:20px 22px 24px;max-width:640px"},h("p",{class:"eyebrow",style:"min-height:28px"},"Un item"),
+      h("div",{class:"cycle",style:"margin-top:22px"},[["J0","faire la fiche"],["J1","relire, 10 QCM"],["J7","relire, 10 QCM"],["J30","relire, 10 QCM"]].map(function(c){return h("div",null,h("b",null,c[0]),h("span",null,c[1]))}))),
+    h("p",{class:"small muted",style:"margin-top:10px"},"Pourquoi : ",h("a",{href:"#m-espacer"},"Espacer les révisions")," et ",h("a",{href:"#m-se-tester"},"Se tester plutôt que relire"),".")));
+
+  root.append(h("section",{class:"section"},h("h2",null,"Les sept onglets"),h("div",{class:"tabsgrid",style:"margin-top:14px"},EDN_TABS.map(function(t){return h("div",{class:"t"},h("b",null,t[0]),h("p",null,t[1]))}))));
+
+  root.append(h("section",{class:"section"},h("h2",null,"La notation des QCM"),
+    h("p",{class:"sub prose"},"Comme à l’EDN, chaque question est notée selon le nombre de discordances entre ta réponse et la réponse attendue."),
+    h("div",{class:"scale"},[["1","0 discordance"],["0,5","1 discordance"],["0,2","2 discordances"],["0","3 ou plus"]].map(function(s){return h("div",null,h("b",null,s[0]),h("span",null,s[1]))}))));
+
+  root.append(h("section",{class:"section"},h("h2",null,"Se l’approprier, pas à pas"),
+    h("ol",{class:"steps prose",style:"margin-top:14px"},EDN_STEPS.map(function(s){return h("li",null,h("span",null,s))}))));
+
+  root.append(h("section",{class:"section"},h("h2",null,"Sans l’outil"),
+    h("p",{class:"sub prose"},"La méthode compte plus que la page. Avec des outils gratuits :"),
+    h("div",{class:"tablewrap"},h("table",{style:"border-collapse:collapse;min-width:520px;width:100%;max-width:760px"},
+      h("thead",null,h("tr",null,["Dans Révisions EDN","Ailleurs, gratuitement"].map(function(x){return h("th",{style:"text-align:left;padding:10px;border-bottom:2px solid var(--line-2);font-size:.85rem"},x)}))),
+      h("tbody",null,[["Fiches et objectifs de rang A / B","LiSA (Uness) et le référentiel de chaque collège"],["Échéances J1, J7, J30","Un agenda ou un tableur avec trois dates par item"],["Séries de QCM","QCM de ta faculté, de ton tutorat ou de ta corpo"],["Carnet d’erreurs","Un carnet papier, ou une carte Anki par erreur"],["Suivi par collège","Un tableur : une ligne par item, une colonne par échéance"]].map(function(r){return h("tr",null,r.map(function(c,i){return h("td",{style:"padding:10px;border-bottom:1px solid var(--line);vertical-align:top"+(i===0?";font-weight:600":"")},c)}))}))))));
+
+  root.append(h("section",{class:"section"},h("h2",null,"Ce qui n’est pas partagé"),
+    h("p",{class:"prose"},"Les fiches et les QCM rangés dans la page restent personnels. Chacun utilise les siens : les supports de faculté, de tutorat ou de prépa appartiennent à leurs auteurs et ne se redistribuent pas sans accord.")));
+  return root;
+}
+
+function published(type){ return S.publie.filter(function(p){return p.type===type}).sort(function(a,b){return (b.publieLe||"").localeCompare(a.publieLe||"")}); }
+function dbNote(what){
+  if(S.dbState==="loading") return h("div",{class:"empty"},"Chargement des "+what+"…");
+  if(S.dbState==="off") return h("div",{class:"empty"},"Les "+what+" s’affichent quand la page est ouverte depuis claude.ai, en étant connecté.");
+  return null;
+}
+
+function viewEntraide(){
+  var root=h("div");
+  root.append(h("div",{class:"phead"},h("h1",null,"Entraide"),h("p",null,"Des annonces pour réviser à plusieurs : binômes, groupes, ECOS en trio, relecture de fiches. Bénévole et gratuit ; chaque annonce est relue avant publication.")));
+  var all=published("annonce");
+  var filieres=[]; all.forEach(function(p){var f=(p.champs||{}).filiere; if(f&&filieres.indexOf(f)<0) filieres.push(f)});
+  var list=h("div",{class:"stack"});
+  var chips=h("div",{class:"chips",style:"margin-bottom:14px"});
+  if(filieres.length>1) [["all","Toutes les filières"]].concat(filieres.map(function(f){return [f,f]})).forEach(function(c){chips.append(h("button",{class:"chip",type:"button","aria-pressed":String(S.boardF===c[0]),onclick:function(){S.boardF=c[0];render()}},c[1]))});
+  var shown=all.filter(function(p){return S.boardF==="all"||(p.champs||{}).filiere===S.boardF});
+  var note=dbNote("annonces");
+  if(note) list.append(note);
+  else if(!shown.length) list.append(h("div",{class:"empty"},"Pas encore d’annonce publiée. La première peut être la tienne."));
+  shown.forEach(function(p){var c=p.champs||{};
+    list.append(h("article",{class:"bristol post"},
+      h("div",{class:"meta"},h("span",{class:"tab ens"},"Je "+(c.genre||"")),c.filiere?h("span",{class:"tag"},c.filiere):null,c.annee?h("span",{class:"tag"},c.annee):null,c.lieu?h("span",{class:"tag"},c.lieu):null),
+      h("p",{style:"white-space:pre-wrap"},c.message||""),
+      c.contact? h("div",null,h("span",{class:"small muted"},"Contact : "),h("span",{class:"contact"},c.contact)):null,
+      h("span",{class:"small muted"},"Publiée le "+fdate(p.publieLe))));
+  });
+  var side=h("aside",{class:"aside"},
+    h("div",{class:"box"},h("h3",null,"Publier une annonce"),h("p",{class:"small",style:"margin-bottom:12px"},"Elle sera visible après relecture, en général sous quelques jours."),h("a",{class:"btn primary sm",href:"#proposer-annonce"},"Écrire une annonce")),
+    h("div",{class:"box"},h("h3",null,"Avant de répondre"),h("ul",{class:"dash small"},
+      h("li",null,"Premier rendez-vous en ligne ou dans un lieu public (BU, faculté)."),
+      h("li",null,"Aucune annonce payante : signale-la."),
+      h("li",null,"Pas d’échange de supports de prépa ou de QCM protégés."),
+      h("li",null,"Aucune information sur un patient, même pour un cas d’entraînement."))));
+  root.append(h("div",{class:"cols"},h("div",null,chips,list),side));
+  return root;
+}
+
+function viewRetours(){
+  var root=h("div");
+  root.append(h("div",{class:"phead"},h("h1",null,"Retours d’expérience"),h("p",null,"Comment d’autres étudiants ont préparé leurs examens : leur organisation, ce qui a marché, ce qui n’a pas marché, et ce que ça leur a coûté. Un retour décrit une expérience, pas une règle.")));
+  var list=h("div",{class:"stack"});
+  var note=dbNote("retours"), all=published("retour");
+  if(note) list.append(note);
+  else if(!all.length) list.append(h("div",{class:"bristol",style:"padding:22px"},
+    h("h3",null,"Aucun retour publié pour l’instant"),
+    h("p",{style:"margin:8px 0 14px;color:var(--ink-2)"},"Chaque retour suit le même plan pour qu’on puisse les comparer :"),
+    h("ul",{class:"dash"},["L’examen préparé, la filière et l’année","Ce que tu as fait","Ce qui a marché","Ce qui n’a pas marché","Ce que ça t’a coûté, en temps et en argent","Un conseil"].map(function(x){return h("li",null,x)})),
+    h("div",{class:"row",style:"margin-top:16px"},h("a",{class:"btn primary",href:"#proposer-retour"},"Écrire mon retour"))));
+  all.forEach(function(p){var c=p.champs||{};
+    list.append(h("article",{class:"bristol post retour"},
+      h("div",{class:"meta"},h("span",{class:"tab ent"},c.examen||"Examen"),c.filiere?h("span",{class:"tag"},c.filiere):null),
+      h("dl",null,[["fait","Ce que j’ai fait"],["marche","Ce qui a marché"],["pasmarche","Ce qui n’a pas marché"],["cout","Coût"],["conseil","Conseil"]].map(function(k){return c[k[0]]?[h("dt",null,k[1]),h("dd",{style:"white-space:pre-wrap"},c[k[0]])]:null})),
+      h("span",{class:"small muted"},(c.signature? c.signature+" · ":"")+"Publié le "+fdate(p.publieLe))));
+  });
+  if(all.length) root.append(h("div",{class:"row",style:"margin-bottom:16px"},h("a",{class:"btn primary sm",href:"#proposer-retour"},"Écrire mon retour")));
+  root.append(list);
+  return root;
+}
+
+function viewProposer(type){
+  if(!FORMS[type]) type="fiche";
+  var root=h("div");
+  root.append(h("div",{class:"phead"},h("h1",null,"Proposer"),h("p",null,"Tout le monde peut proposer. Chaque envoi est relu avant d’être publié ; tu peux suivre son état en bas de cette page.")));
+  var types=h("div",{class:"types",role:"radiogroup","aria-label":"Type de proposition"});
+  Object.keys(FORMS).forEach(function(k){
+    types.append(h("label",null,h("input",{type:"radio",name:"ptype",value:k,checked:k===type,onchange:function(){location.hash="#proposer-"+k}}),h("span",null,h("span",{style:"display:block"},FORMS[k].t),h("span",{class:"small muted",style:"font-weight:400"},FORMS[k].d))));
+  });
+  root.append(types);
+  var spec=FORMS[type];
+  var form=h("form",{class:"bristol f",style:"margin-top:18px",novalidate:true});
+  var pre=S.prefill||{}; S.prefill=null;
+  var draft=store("mec-draft-"+type)||{};
+  var grid=null;
+  spec.f.forEach(function(fd){
+    var id="f-"+type+"-"+fd.k; var val=pre[fd.k]||draft[fd.k]||"";
+    var input = fd.type==="select" ? h("select",{id:id,name:fd.k,required:fd.req?true:null},h("option",{value:""},"Choisir…"),fd.o.map(function(o){return h("option",{value:o,selected:o===val},o)}))
+      : fd.type==="area" ? h("textarea",{id:id,name:fd.k,placeholder:fd.ph||null,required:fd.req?true:null})
+      : h("input",{id:id,name:fd.k,type:"text",placeholder:fd.ph||null,required:fd.req?true:null,value:val});
+    if(fd.type==="area") input.value=val;
+    var fieldEl=h("div",{class:"field"},h("label",{for:id},fd.l,fd.req?"":h("span",{class:"muted",style:"font-weight:400"}," (facultatif)")),input,fd.hint?h("span",{class:"hint"},fd.hint):null);
+    if(fd.half){ if(!grid){grid=h("div",{class:"two"});form.append(grid);} grid.append(fieldEl); if(grid.children.length===2) grid=null; }
+    else { grid=null; form.append(fieldEl); }
+  });
+  form.addEventListener("input",function(){ store("mec-draft-"+type,readForm(form)); });
+  var status=h("div",{"aria-live":"polite"});
+  if(S.sent===type){ status.append(h("div",{class:"ok"},"Merci, c’est envoyé. Ta proposition attend une relecture.")); }
+  if(S.err) status.append(h("div",{class:"err"},S.err));
+  form.append(status);
+  form.append(h("p",{class:"small muted"},"En envoyant, tu confirmes que c’est ton propre travail ou une ressource librement partageable, et qu’il n’y a aucune information sur un patient."));
+  var canSend = S.dbState==="on" && S.uid && S.canWrite!==false;
+  var actions=h("div",{class:"row"});
+  if(canSend) actions.append(h("button",{class:"btn primary",type:"submit",disabled:S.busy},S.busy?"Envoi…":"Envoyer pour relecture"));
+  else actions.append(h("div",{class:"notice",style:"flex-basis:100%"},
+      "Depuis ce lien, les envois en ligne ne sont pas encore ouverts. Copie ta proposition et envoie-la à la personne qui t’a partagé le site.",
+      h("div",{class:"row",style:"margin-top:10px"},h("button",{class:"btn sm",type:"button",onclick:function(e){copyForm(form,spec,e.target)}},"Copier ma proposition"))));
+  form.append(actions);
+  form.addEventListener("submit",function(e){ e.preventDefault(); if(!canSend||S.busy) return; submit(form,type,spec); });
+  root.append(form);
+  root.append(viewMine());
+  return root;
+}
+function readForm(form){ var o={}; Array.prototype.forEach.call(form.elements,function(el){ if(el.name) o[el.name]=el.value.trim(); }); return o; }
+function copyForm(form,spec,btn){
+  var o=readForm(form); var txt=spec.t+"\n\n"+spec.f.map(function(f){return f.l+" : "+(o[f.k]||"—")}).join("\n");
+  function done(){ btn.textContent="Copié"; setTimeout(function(){btn.textContent="Copier ma proposition"},2000); }
+  try{ navigator.clipboard.writeText(txt).then(done,fallback); }catch(e){ fallback(); }
+  function fallback(){ var ta=h("textarea",{class:"field",style:"width:100%;min-height:160px;margin-top:10px"}); ta.value=txt; btn.parentNode.after(ta); ta.select(); }
+}
+async function submit(form,type,spec){
+  var o=readForm(form); var missing=spec.f.filter(function(f){return f.req&&!o[f.k]}).map(function(f){return f.l});
+  if(missing.length){ S.err="À remplir : "+missing.join(", ")+"."; S.sent=null; render(); return; }
+  if(o.lien && !safeUrl(o.lien)){ S.err="Le lien doit commencer par https://"; render(); return; }
+  S.err=null; S.busy=true; render();
+  try{
+    var ref=S.db.doc("file/"+S.uid); var snap=await ref.get();
+    var envois=snap.exists? ((snap.data()||{}).envois||[]).slice() : [];
+    envois.push({id:uid(),type:type,champs:o,date:new Date().toISOString(),statut:"à relire"});
+    await ref.set({envois:envois,maj:new Date().toISOString()});
+    store("mec-draft-"+type,{}); S.sent=type;
+  }catch(err){
+    if(err&&err.code==="invalid_argument"){ S.canWrite=false; S.err=null; }
+    else if(err&&err.code==="quota_exceeded") S.err="La file de relecture est pleine pour le moment. Réessaie dans quelques jours.";
+    else S.err="L’envoi n’a pas abouti. Vérifie ta connexion et réessaie.";
+  }
+  S.busy=false; render();
+}
+function viewMine(){
+  var m=S.mine; if(!m||!m.length) return h("div");
+  return h("section",{class:"section"},h("h2",null,"Mes propositions"),h("div",{class:"mine",style:"margin-top:12px"},
+    m.slice().reverse().map(function(e){var c=e.champs||{};
+      var st=e.statut==="publiée"?"pub":e.statut==="non retenue"?"no":"wait";
+      return h("div",{class:"it"},h("span",null,h("b",null,FORMS[e.type]?FORMS[e.type].t:e.type)," · ",c.titre||c.nom||c.examen||c.page||(c.message||"").slice(0,60)),h("span",{class:"row",style:"gap:8px"},h("span",{class:"small muted"},fdate(e.date)),h("span",{class:"st "+st},e.statut)));})));
+}
+
+function pending(){ var out=[]; S.queue.forEach(function(d){ (d.envois||[]).forEach(function(e){ if(e.statut==="à relire") out.push({owner:d.id,e:e}); }); }); return out.sort(function(a,b){return a.e.date.localeCompare(b.e.date)}); }
+function viewRelecture(){
+  if(!S.admin) return h("div",{class:"empty"},"Cette page est réservée à l’équipe de relecture.");
+  var root=h("div");
+  root.append(h("div",{class:"phead"},h("h1",null,"Relecture"),h("p",null,"Les propositions en attente, de la plus ancienne à la plus récente. Publier la rend visible pour tous ; « Ne pas retenir » la garde dans l’historique de son auteur.")));
+  var list=pending();
+  if(!list.length) root.append(h("div",{class:"empty"},"Rien à relire pour l’instant."));
+  list.forEach(function(it){ var e=it.e, c=e.champs||{};
+    root.append(h("article",{class:"bristol rv",style:"margin-bottom:12px"},
+      h("div",{class:"row",style:"justify-content:space-between"},h("b",null,FORMS[e.type]?FORMS[e.type].t:e.type),h("span",{class:"small muted"},"Reçue le "+fdate(e.date))),
+      h("dl",null,Object.keys(c).filter(function(k){return c[k]}).map(function(k){return [h("dt",null,LABELS[k]||k),h("dd",null,c[k])]})),
+      e.type==="correction"? h("p",{class:"small muted"},"Une correction ne se publie pas : corrige la fiche, puis marque-la comme traitée."):null,
+      h("div",{class:"row"},
+        h("button",{class:"btn primary sm",type:"button",onclick:function(ev){decide(it,e.type==="correction"?"traitée":"publiée",ev.target)}},e.type==="correction"?"Marquer traitée":"Publier"),
+        h("button",{class:"btn sm",type:"button",onclick:function(ev){decide(it,"non retenue",ev.target)}},"Ne pas retenir"))));
+  });
+  return root;
+}
+async function decide(it,statut,btn){
+  btn.disabled=true;
+  try{
+    if(statut==="publiée"){
+      var c=Object.assign({},it.e.champs);
+      if(it.e.type!=="annonce") delete c.contact;
+      await S.db.doc("publie/"+it.e.id).set({type:it.e.type,champs:c,publieLe:new Date().toISOString()});
+    }
+    var ref=S.db.doc("file/"+it.owner); var snap=await ref.get(); var d=snap.data()||{};
+    var envois=(d.envois||[]).map(function(x){ return x.id===it.e.id? Object.assign({},x,{statut:statut,decide:new Date().toISOString()}) : x; });
+    await ref.update({envois:envois});
+  }catch(err){ btn.disabled=false; btn.textContent="Échec, réessayer"; }
+}
+
+function viewPrincipes(){
+  var items=[
+   ["Gratuit, toujours","Pas de vente, pas de publicité, pas de lien affilié. Les annonces d’entraide sont bénévoles : un cours payant n’a pas sa place ici."],
+   ["Sourcé et honnête","Chaque fiche cite ses sources et dit à quel point c’est prouvé. Quand une méthode repose sur l’expérience plutôt que sur des études, la fiche le dit."],
+   ["Relu avant publication","Tout le monde peut proposer une fiche, un outil, un retour ou une annonce. Rien n’est publié sans relecture, et chacun peut proposer une correction."],
+   ["Partager son travail, pas celui des autres","Pas de copie de supports de prépa, de livres ou de banques de QCM protégés. On partage ses propres fiches, ses méthodes et des ressources libres."],
+   ["Aucune information sur un patient","Ni dans les fiches, ni dans les retours, ni dans les cas d’entraînement, même sans le nom : le secret médical s’applique aussi aux étudiants."],
+   ["Bienveillance","On décrit ce qui a marché pour soi, sans juger la méthode des autres. Il n’y a pas de classement des personnes."],
+   ["Tes données","Une proposition n’est lue que par l’équipe de relecture. Pour une annonce, seul le contact que tu choisis est publié. Une annonce peut être retirée sur demande."]
+  ];
+  return h("div",null,h("div",{class:"phead"},h("h1",null,"Principes"),h("p",null,"Le site veut rendre accessibles des méthodes et un accompagnement qu’on paie souvent cher, en s’appuyant sur l’entraide. Ces règles s’appliquent à tout ce qui est publié.")),
+    h("ol",{class:"charte prose"},items.map(function(i){return h("li",null,h("div",null,h("h3",null,i[0]),h("p",null,i[1])))})),
+    h("div",{class:"notice",style:"margin-top:30px;max-width:66ch"},"Si les révisions deviennent trop lourdes à porter, le service de santé étudiante de ton université peut t’aider, gratuitement et en toute confidentialité."));
+}
+
+function render(){
+  renderNav();
+  var r=route(), app=document.getElementById("app"), v;
+  if(r==="accueil") v=viewAccueil();
+  else if(r==="methodes") v=viewMethodes();
+  else if(r.indexOf("m-")===0) v=viewFiche(r.slice(2));
+  else if(r==="outils") v=viewOutils();
+  else if(r==="revisions-edn") v=viewEDN();
+  else if(r==="entraide") v=viewEntraide();
+  else if(r==="retours") v=viewRetours();
+  else if(r==="principes") v=viewPrincipes();
+  else if(r==="relecture") v=viewRelecture();
+  else if(r.indexOf("proposer")===0) v=viewProposer(r.split("-")[1]||"fiche");
+  else v=viewAccueil();
+  var focused=document.activeElement&&document.activeElement.id;
+  app.replaceChildren(v);
+  if(focused&&document.getElementById(focused)) { var el=document.getElementById(focused); el.focus(); if(el.setSelectionRange&&el.value) try{el.setSelectionRange(el.value.length,el.value.length)}catch(e){} }
+}
+var lastRoute=route();
+window.addEventListener("hashchange",function(){ var r=route(); if(r!==lastRoute){ S.sent=null; S.err=null; lastRoute=r; render(); window.scrollTo(0,0); } });
+
+/* Re-render on new shared data, except while someone is filling in a form */
+function soft(){ if(route().indexOf("proposer")===0) renderNav(); else render(); }
+/* ================= Données partagées ================= */
+async function boot(){
+  render();
+  var c=window.claude; if(!c||typeof c.use!=="function"){ S.dbState="off"; render(); return; }
+  try{
+    var both=await Promise.all([c.use("user").catch(function(){return null}), c.use("db").catch(function(){return null})]);
+    var u=both[0], db=both[1];
+    if(u){ S.user=u;
+      try{ S.owner=!!(await u.isOwner()); }catch(e){}
+      try{ S.admin=S.owner||!!(await u.canEdit()); }catch(e){}
+      try{ S.canWrite=await u.can("data.write"); }catch(e){}
+      try{ S.uid=await u.id(); }catch(e){}
+    }
+    if(!db){ S.dbState="off"; render(); return; }
+    S.db=db; S.dbState="on"; render();
+    db.collection("publie").onSnapshot(function(snap){ S.publie=snap.docs.map(function(d){return Object.assign({id:d.id},d.data())}); S.gotPublie=true; soft(); }, function(){ S.gotPublie=true; soft(); });
+    if(S.uid) db.doc("file/"+S.uid).onSnapshot(function(d){ S.mine=d.exists? ((d.data()||{}).envois||[]) : []; if(route().indexOf("proposer")===0) render(); }, function(){});
+    if(S.admin) db.collection("file").onSnapshot(function(snap){ S.queue=snap.docs.map(function(d){return Object.assign({id:d.id},d.data())}); if(route()==="relecture") render(); else renderNav(); }, function(){});
+  }catch(e){ S.dbState="off"; render(); }
+}
+boot();
+})();
+</script>
+
+</body></html>
